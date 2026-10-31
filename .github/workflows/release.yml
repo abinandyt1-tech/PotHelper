@@ -56,10 +56,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
-          KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
+          KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}    
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+      - name: Check APK Exists
+        run: find . -name "*.apk" -type f
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PotHelper-APK
-          path: app/build/outputs/apk/**/*.apk
-          if-no-files-found: error
+         name: PotHelper-APK
+         path: "**/*.apk"
+         if-no-files-found: error
