@@ -63,10 +63,8 @@ android {
 
     buildTypes {
         release {
-
             val keystoreFile = file("keystore.jks")
             signingConfig = signingConfigs.getByName("debug")
-            }
         }
     }
 
