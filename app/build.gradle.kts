@@ -63,18 +63,9 @@ android {
 
     buildTypes {
         release {
-
-            val keystoreFile = file("keystore.jks")
-            signingConfig = if (keystoreFile.exists()) {
-                signingConfigs.create("release") {
-                    storeFile = keystoreFile
-                    storePassword = System.getenv("KEYSTORE_PASSWORD")
-                    keyAlias = System.getenv("KEYSTORE_ENTRY_ALIAS")
-                    keyPassword = System.getenv("KEYSTORE_ENTRY_PASSWORD")
-                }
-            } else {
+            signingConfig {
                 signingConfigs.getByName("debug")
-            }
+                signingConfigs.debug
         }
     }
 
